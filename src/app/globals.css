@@ -1,26 +1,10 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@theme {
+  /* テーマカラーの設定（Tailwind v4の新しい書き方です） */
+  --color-primary-dark: #0B4228;
+  --color-primary: #1A5C3D;
+  --color-primary-light: #2E7D54;
+  --color-accent-gold: #D4AF37;
+  --color-accent-light: #F3E5AB;
 }

@@ -1,65 +1,320 @@
-import Image from "next/image";
+"use client";
+
+import { motion } from "framer-motion";
+import { useState } from "react"; // ★追加：フォームの状態を管理するため
 
 export default function Home() {
+  // フォームの送信状態を管理する変数
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  // 送信ボタンが押された時の処理
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    const form = e.currentTarget;
+    const data = new FormData(form);
+
+    try {
+      // ★★★ここに先ほどコピーしたURLを貼り付けます★★★
+      const response = await fetch("https://formspree.io/f/xzdkaqqk", {
+        method: "POST",
+        body: data,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+      
+      if (response.ok) {
+        setIsSubmitted(true);
+        form.reset();
+      } else {
+        alert("送信に失敗しました。時間をおいて再度お試しください。");
+      }
+    } catch (error) {
+      alert("エラーが発生しました。");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="bg-primary-dark text-white font-sans overflow-x-hidden">
+      
+      {/* =======================
+          1. Hero セクション
+      ======================= */}
+      <section className="min-h-screen flex flex-col items-center justify-center p-8 text-center relative">
+        <motion.h1 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="text-5xl md:text-7xl font-extrabold text-accent-gold mb-6 tracking-wide"
+        >
+          Code for Better Solutions.
+        </motion.h1>
+
+        <motion.p 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+          className="text-lg md:text-xl max-w-2xl text-gray-300 leading-relaxed mb-12"
+        >
+          「言われたものを作る」のではなく、「期待の120%」を創る。<br />
+          表面的な課題を解決するだけでなく、ユーザーの隠れたニーズを掘り起こし、＋αのアイデアを掛け合わせたプロダクトを提案します。
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+        >
+          <a 
+            href="#works" 
+            className="inline-block px-10 py-4 bg-accent-gold text-primary-dark font-bold text-lg rounded-full hover:bg-accent-light transition-all duration-300 shadow-lg hover:shadow-[0_0_20px_rgba(212,175,55,0.5)]"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
+            View Works
           </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+        </motion.div>
+      </section>
+
+      {/* =======================
+          2. Works セクション
+      ======================= */}
+      <section id="works" className="py-24 px-6 md:px-12 max-w-7xl mx-auto min-h-screen flex flex-col justify-center">
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8 }}
+          className="mb-16 md:mb-24"
+        >
+          <h2 className="text-4xl md:text-5xl font-bold text-accent-gold mb-4 border-l-4 border-accent-gold pl-4">
+            Featured Project
+          </h2>
+          <p className="text-gray-400 text-lg">課題解決アプローチを具現化した代表作</p>
+        </motion.div>
+
+        <div className="flex flex-col md:flex-row items-center gap-16">
+          <motion.div 
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="w-full md:w-1/2"
           >
-            Documentation
-          </a>
+            <h3 className="text-3xl md:text-4xl font-bold mb-6 tracking-wide">
+              GrachanScore
+            </h3>
+            <p className="text-gray-300 leading-relaxed mb-8">
+              幹事の業務負担とプレイヤーの「こんな機能が欲しい」を同時に叶える、フルスタックのプロ仕様ゴルフスコア管理アプリ。
+            </p>
+            <ul className="space-y-4 mb-8">
+              {[
+                "LINEログインAPIを活用したパスワードレス認証",
+                "Wペリア計算エンジン搭載 (男女別ハンディ上限完全対応)",
+                "誤タップ防止・画面幅に応じたこだわりのUI/UX設計",
+                "QRコードを利用した同伴者スコアの先行読み込み"
+              ].map((feature, index) => (
+                <li key={index} className="flex items-start">
+                  <span className="text-accent-gold mr-3 mt-1">✔</span>
+                  <span className="text-gray-200">{feature}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="flex flex-wrap gap-3">
+              {["React", "Next.js", "Node.js (Express)", "MongoDB", "Tailwind CSS"].map((tech) => (
+                <span key={tech} className="bg-primary/50 border border-primary-light text-sm px-4 py-1.5 rounded-full text-gray-200">
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="w-full md:w-1/2 flex justify-center items-center gap-4 md:gap-6 relative"
+          >
+            <div className="w-1/3 max-w-[180px] aspect-[9/16] bg-primary rounded-[2rem] border-[6px] border-gray-800 shadow-2xl translate-y-8 flex flex-col overflow-hidden relative">
+              <div className="absolute top-2 w-1/3 h-4 bg-gray-800 rounded-b-xl left-1/2 -translate-x-1/2 z-10"></div>
+              <div className="w-full h-full bg-gradient-to-br from-primary-light to-primary-dark opacity-50 flex items-center justify-center p-4 text-center text-xs text-gray-400">Image 1</div>
+            </div>
+            <div className="w-1/3 max-w-[180px] aspect-[9/16] bg-primary rounded-[2rem] border-[6px] border-gray-800 shadow-2xl z-10 -translate-y-4 flex flex-col overflow-hidden relative shadow-[0_0_30px_rgba(212,175,55,0.2)]">
+              <div className="absolute top-2 w-1/3 h-4 bg-gray-800 rounded-b-xl left-1/2 -translate-x-1/2 z-10"></div>
+              <div className="w-full h-full bg-gradient-to-br from-accent-gold/20 to-primary-dark flex items-center justify-center p-4 text-center text-sm font-bold text-accent-light">Main Screen</div>
+            </div>
+            <div className="w-1/3 max-w-[180px] aspect-[9/16] bg-primary rounded-[2rem] border-[6px] border-gray-800 shadow-2xl translate-y-8 flex flex-col overflow-hidden relative">
+              <div className="absolute top-2 w-1/3 h-4 bg-gray-800 rounded-b-xl left-1/2 -translate-x-1/2 z-10"></div>
+              <div className="w-full h-full bg-gradient-to-br from-primary-light to-primary-dark opacity-50 flex items-center justify-center p-4 text-center text-xs text-gray-400">Image 3</div>
+            </div>
+          </motion.div>
         </div>
-      </main>
+      </section>
+
+      {/* =======================
+          3. About セクション
+      ======================= */}
+      <section id="about" className="py-24 px-6 md:px-12 max-w-7xl mx-auto min-h-screen flex flex-col justify-center">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8 }}
+          className="mb-16 md:mb-24 text-center"
+        >
+          <h2 className="text-4xl md:text-5xl font-bold text-accent-gold mb-4 inline-block border-b-4 border-accent-gold pb-2">
+            About Me
+          </h2>
+          <p className="text-gray-400 text-lg mt-4">現場のリアルな課題を、コードで解決するエンジニア</p>
+        </motion.div>
+
+        <div className="flex flex-col md:flex-row items-center gap-12 md:gap-20">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="w-full md:w-5/12 flex justify-center"
+          >
+            <div className="w-64 h-64 md:w-80 md:h-80 rounded-full border-4 border-accent-gold/50 bg-primary shadow-[0_0_30px_rgba(212,175,55,0.2)] flex items-center justify-center overflow-hidden relative group">
+               <div className="absolute inset-0 bg-gradient-to-br from-accent-gold/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+               <span className="text-gray-400 text-center">Profile Image</span>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="w-full md:w-7/12"
+          >
+            <h3 className="text-2xl md:text-3xl font-bold mb-6 text-white leading-tight">
+              「現場」を知っているからこそ、<br className="hidden md:block"/>
+              痒い所に手が届くプロダクトが作れる。
+            </h3>
+            <p className="text-gray-300 leading-relaxed mb-6">
+              フルスタックのスコア管理アプリ「GrachanScore」をゼロから完成させた経験から、私は「技術力」と同じくらい「現場のドメイン知識」が重要であると確信しています。
+            </p>
+            <p className="text-gray-300 leading-relaxed mb-8">
+              幹事がWペリアの計算でどれほど苦労しているのか、プレイヤーがプレイ中にどうスマホを操作するのか。そうした「現場のリアルな解像度」を持っているからこそ、単に仕様通り動くものではなく、真にユーザーの課題を解決する＋αのWeb体験を設計できます。
+            </p>
+
+            <div className="space-y-6">
+              <div>
+                <h4 className="text-accent-light font-semibold mb-3 tracking-wider text-sm">FRONTEND</h4>
+                <div className="flex flex-wrap gap-2">
+                  {["HTML/CSS", "React", "Next.js", "Tailwind CSS", "Framer Motion"].map(skill => (
+                    <span key={skill} className="px-3 py-1 bg-primary-light/50 border border-primary-light text-sm rounded text-white">{skill}</span>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <h4 className="text-accent-light font-semibold mb-3 tracking-wider text-sm">BACKEND & DB</h4>
+                <div className="flex flex-wrap gap-2">
+                  {["Node.js", "Express", "MongoDB", "REST API", "LINE Login API"].map(skill => (
+                    <span key={skill} className="px-3 py-1 bg-primary-light/50 border border-primary-light text-sm rounded text-white">{skill}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* =======================
+          4. Contact セクション
+      ======================= */}
+      <section id="contact" className="py-24 px-6 md:px-12 max-w-4xl mx-auto flex flex-col justify-center">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl md:text-5xl font-bold text-accent-gold mb-4 inline-block border-b-4 border-accent-gold pb-2">
+            Contact
+          </h2>
+          <p className="text-gray-400 text-lg mt-4">プロジェクトのご相談やお問い合わせはこちらから</p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="bg-primary/30 p-8 md:p-12 rounded-3xl border border-primary-light backdrop-blur-sm"
+        >
+          {isSubmitted ? (
+             <div className="text-center py-12">
+               <h3 className="text-2xl font-bold text-accent-gold mb-4">送信完了しました！</h3>
+               <p className="text-gray-300">お問い合わせありがとうございます。<br/>内容を確認次第、ご連絡させていただきます。</p>
+             </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="flex flex-col">
+                  <label htmlFor="name" className="text-sm text-gray-300 mb-2 ml-1">お名前</label>
+                  <input 
+                    type="text" 
+                    id="name" 
+                    name="name" 
+                    required
+                    className="bg-primary-dark/50 border border-primary-light rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent-gold focus:ring-1 focus:ring-accent-gold transition-all"
+                    placeholder="山田 太郎"
+                  />
+                </div>
+                <div className="flex flex-col">
+                  <label htmlFor="email" className="text-sm text-gray-300 mb-2 ml-1">メールアドレス</label>
+                  <input 
+                    type="email" 
+                    id="email" 
+                    name="email"
+                    required
+                    className="bg-primary-dark/50 border border-primary-light rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent-gold focus:ring-1 focus:ring-accent-gold transition-all"
+                    placeholder="example@mail.com"
+                  />
+                </div>
+              </div>
+              <div className="flex flex-col">
+                <label htmlFor="message" className="text-sm text-gray-300 mb-2 ml-1">メッセージ</label>
+                <textarea 
+                  id="message" 
+                  name="message"
+                  required
+                  rows={5}
+                  className="bg-primary-dark/50 border border-primary-light rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent-gold focus:ring-1 focus:ring-accent-gold transition-all resize-none"
+                  placeholder="お問い合わせ内容をご記入ください。"
+                ></textarea>
+              </div>
+              <div className="pt-4 text-center">
+                <button 
+                  type="submit" 
+                  disabled={isSubmitting}
+                  className="w-full md:w-auto px-12 py-4 bg-accent-gold text-primary-dark font-bold text-lg rounded-full hover:bg-accent-light transition-all duration-300 shadow-lg hover:shadow-[0_0_20px_rgba(212,175,55,0.5)] disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? "送信中..." : "送信する"}
+                </button>
+              </div>
+            </form>
+          )}
+        </motion.div>
+      </section>
+
+      {/* =======================
+          Footer
+      ======================= */}
+      <footer className="border-t border-primary-light mt-12 py-8 text-center">
+        <p className="text-gray-400 text-sm">
+          &copy; {new Date().getFullYear()} My Portfolio. Built with Next.js & Tailwind CSS.
+        </p>
+      </footer>
+
     </div>
   );
 }
