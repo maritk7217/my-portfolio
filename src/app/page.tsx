@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react"; // ★追加：フォームの状態を管理するため
+import Image from "next/image";
 
 export default function Home() {
   // フォームの送信状態を管理する変数
@@ -61,7 +62,7 @@ export default function Home() {
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
           className="text-lg md:text-xl max-w-2xl text-gray-300 leading-relaxed mb-12"
         >
-          「言われたものを作る」のではなく、「期待の120%」を創る。<br />
+          「言われたものを作る」のではなく、「120%」の成果物を提供する。<br />
           表面的な課題を解決するだけでなく、ユーザーの隠れたニーズを掘り起こし、＋αのアイデアを掛け合わせたプロダクトを提案します。
         </motion.p>
 
@@ -139,17 +140,22 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="w-full md:w-1/2 flex justify-center items-center gap-4 md:gap-6 relative"
           >
+            {/* スマホ 1 (左) */}
             <div className="w-1/3 max-w-[180px] aspect-[9/16] bg-primary rounded-[2rem] border-[6px] border-gray-800 shadow-2xl translate-y-8 flex flex-col overflow-hidden relative">
               <div className="absolute top-2 w-1/3 h-4 bg-gray-800 rounded-b-xl left-1/2 -translate-x-1/2 z-10"></div>
-              <div className="w-full h-full bg-gradient-to-br from-primary-light to-primary-dark opacity-50 flex items-center justify-center p-4 text-center text-xs text-gray-400">Image 1</div>
+              <Image src="/work1.png" alt="GrachanScore UI" fill className="object-cover z-10" />
             </div>
+
+            {/* スマホ 2 (中央・メイン) */}
             <div className="w-1/3 max-w-[180px] aspect-[9/16] bg-primary rounded-[2rem] border-[6px] border-gray-800 shadow-2xl z-10 -translate-y-4 flex flex-col overflow-hidden relative shadow-[0_0_30px_rgba(212,175,55,0.2)]">
               <div className="absolute top-2 w-1/3 h-4 bg-gray-800 rounded-b-xl left-1/2 -translate-x-1/2 z-10"></div>
-              <div className="w-full h-full bg-gradient-to-br from-accent-gold/20 to-primary-dark flex items-center justify-center p-4 text-center text-sm font-bold text-accent-light">Main Screen</div>
+              <Image src="/work2.png" alt="GrachanScore Main" fill className="object-cover z-10" />
             </div>
+
+            {/* スマホ 3 (右) */}
             <div className="w-1/3 max-w-[180px] aspect-[9/16] bg-primary rounded-[2rem] border-[6px] border-gray-800 shadow-2xl translate-y-8 flex flex-col overflow-hidden relative">
               <div className="absolute top-2 w-1/3 h-4 bg-gray-800 rounded-b-xl left-1/2 -translate-x-1/2 z-10"></div>
-              <div className="w-full h-full bg-gradient-to-br from-primary-light to-primary-dark opacity-50 flex items-center justify-center p-4 text-center text-xs text-gray-400">Image 3</div>
+              <Image src="/work3.png" alt="GrachanScore QR" fill className="object-cover z-10" />
             </div>
           </motion.div>
         </div>
@@ -181,7 +187,7 @@ export default function Home() {
             className="w-full md:w-5/12 flex justify-center"
           >
             <div className="w-64 h-64 md:w-80 md:h-80 rounded-full border-4 border-accent-gold/50 bg-primary shadow-[0_0_30px_rgba(212,175,55,0.2)] flex items-center justify-center overflow-hidden relative group">
-               <div className="absolute inset-0 bg-gradient-to-br from-accent-gold/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <Image src="/profile.jpg" alt="Profile" fill className="object-cover z-10" />
                <span className="text-gray-400 text-center">Profile Image</span>
             </div>
           </motion.div>
