@@ -63,7 +63,7 @@ export default function Home() {
           className="text-lg md:text-xl max-w-2xl text-gray-300 leading-relaxed mb-12"
         >
           「言われたものを作る」のではなく、「120%」の成果物を提供する。<br />
-          表面的な課題を解決するだけでなく、ユーザーの隠れたニーズを掘り起こし、＋αのアイデアを掛け合わせたプロダクトを提案します。
+          表面的な課題を解決するだけでなく、ユーザーの隠れたニーズを掘り起こし、＋αの<br />アイデアを掛け合わせたプロダクトを提案します。
         </motion.p>
 
         <motion.div
@@ -175,7 +175,7 @@ export default function Home() {
           <h2 className="text-4xl md:text-5xl font-bold text-accent-gold mb-4 inline-block border-b-4 border-accent-gold pb-2">
             About Me
           </h2>
-          <p className="text-gray-400 text-lg mt-4">現場のリアルな課題を、コードで解決するエンジニア</p>
+          <p className="text-gray-400 text-lg mt-4">現場の困り事を、コードで解決するエンジニア</p>
         </motion.div>
 
         <div className="flex flex-col md:flex-row items-center gap-12 md:gap-20">
