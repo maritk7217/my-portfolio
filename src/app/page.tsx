@@ -166,19 +166,19 @@ export default function Home() {
             {/* スマホ 1 (左) */}
             <motion.div variants={staggerItem} whileHover={{ y: -10 }} className="w-1/3 max-w-[180px] aspect-[9/16] bg-primary rounded-[2rem] border-[6px] border-gray-800 shadow-2xl translate-y-8 flex flex-col overflow-hidden relative cursor-pointer">
               <div className="absolute top-2 w-1/3 h-4 bg-gray-800 rounded-b-xl left-1/2 -translate-x-1/2 z-10"></div>
-              <Image src="/grachan1.png" alt="GrachanScore UI" fill className="object-cover z-10" />
+            <Image src="/grachan1.png" alt="GrachanScore UI" fill className="object-cover z-10" unoptimized />
             </motion.div>
 
             {/* スマホ 2 (中央・メイン) */}
             <motion.div variants={staggerItem} whileHover={{ y: -10, scale: 1.02 }} className="w-1/3 max-w-[180px] aspect-[9/16] bg-primary rounded-[2rem] border-[6px] border-gray-800 shadow-2xl z-10 -translate-y-4 flex flex-col overflow-hidden relative shadow-[0_0_30px_rgba(212,175,55,0.2)] cursor-pointer">
               <div className="absolute top-2 w-1/3 h-4 bg-gray-800 rounded-b-xl left-1/2 -translate-x-1/2 z-10"></div>
-              <Image src="/grachan2.png" alt="GrachanScore Main" fill className="object-cover z-10" />
+            <Image src="/grachan2.png" alt="GrachanScore Main" fill className="object-cover z-10" unoptimized />
             </motion.div>
 
             {/* スマホ 3 (右) */}
             <motion.div variants={staggerItem} whileHover={{ y: -10 }} className="w-1/3 max-w-[180px] aspect-[9/16] bg-primary rounded-[2rem] border-[6px] border-gray-800 shadow-2xl translate-y-8 flex flex-col overflow-hidden relative cursor-pointer">
               <div className="absolute top-2 w-1/3 h-4 bg-gray-800 rounded-b-xl left-1/2 -translate-x-1/2 z-10"></div>
-              <Image src="/grachan3.png" alt="GrachanScore QR" fill className="object-cover z-10" />
+            <Image src="/grachan3.png" alt="GrachanScore QR" fill className="object-cover z-10" unoptimized />
             </motion.div>
           </motion.div>
         </div>
