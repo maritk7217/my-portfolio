@@ -1,26 +1,28 @@
 "use client";
 
-import { motion } from "framer-motion";
+// ★修正1：{ motion } の隣に , Variants を追加します
+import { motion, Variants } from "framer-motion"; 
 import { useState } from "react";
 import Image from "next/image";
 
-// ★追加：Worksセクションのスマホを順番に出現させるための設定（バリアント）
-const staggerContainer = {
+// ★修正2：変数名の後ろに : Variants を追加します
+const staggerContainer: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2, // 0.2秒間隔で次々とアニメーションを実行
+      staggerChildren: 0.2,
     },
   },
 };
 
-const staggerItem = {
+// ★修正3：変数名の後ろに : Variants を追加します
+const staggerItem: Variants = {
   hidden: { opacity: 0, y: 50 },
   visible: { 
     opacity: 1, 
     y: 0,
-    transition: { type: "spring", stiffness: 100, damping: 15 } // モチッとした動き
+    transition: { type: "spring", stiffness: 100, damping: 15 } 
   },
 };
 
