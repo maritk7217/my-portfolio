@@ -81,8 +81,8 @@ export default function Home() {
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
           className="text-lg md:text-xl max-w-2xl text-gray-300 leading-relaxed mb-12"
         >
-          「言われたものを作る」のではなく、「120%」の成果物を提供する。<br />
-          表面的な課題を解決するだけでなく、ユーザーの隠れたニーズを掘り起こし、＋αの<br />アイデアを掛け合わせたプロダクトを提案します。
+          「言われたものを作る」のではなく、「120%」の成果物を提供する。
+          表面的な課題を解決するだけでなく、ユーザーの隠れたニーズを掘り起こし、＋αのアイデアを掛け合わせたプロダクトを提案します。
         </motion.p>
 
         <motion.div
@@ -120,6 +120,7 @@ export default function Home() {
         </motion.div>
 
         <div className="flex flex-col md:flex-row items-center gap-16">
+{/* 左側：説明文 */}
           <motion.div 
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -130,15 +131,24 @@ export default function Home() {
             <h3 className="text-3xl md:text-4xl font-bold mb-6 tracking-wide">
               GrachanScore
             </h3>
-            <p className="text-gray-300 leading-relaxed mb-8">
-              幹事の業務負担とプレイヤーの「こんな機能が欲しい」を同時に叶える、フルスタックのプロ仕様ゴルフスコア管理アプリ。
+
+            <p className="mb-8">
+            ゴルフ仲間のスコア共有とコンペ運営を一括で管理できるアプリ
             </p>
+                        <p className="mb-8">
+            ラウンド後のスコア共有やコンペ運営の手間を解消するために開発。
+            </p>
+            <p className="mb-8">
+              QRコードでスコアを自動取り込みし、複数人の結果を即時共有。
+              さらに、LINE連携によるコンペ管理まで一貫して行えるよう設計しています。
+            </p>
+
             <ul className="space-y-4 mb-8">
               {[
+                "QRコードで同伴者全員のスコアを一括取得（手入力不要）",
                 "LINEログインAPIを活用したパスワードレス認証",
-                "Wペリア計算エンジン搭載 (男女別ハンディ上限完全対応)",
-                "誤タップ防止・画面幅に応じたこだわりのUI/UX設計",
-                "QRコードを利用した同伴者スコアの先行読み込み"
+                "Wペリア計算エンジン搭載（男女別ハンディ上限完全対応）",
+                "誤タップ防止・画面幅に応じたUI/UX設計"
               ].map((feature, index) => (
                 <li key={index} className="flex items-start">
                   <span className="text-accent-gold mr-3 mt-1">✔</span>
@@ -146,13 +156,30 @@ export default function Home() {
                 </li>
               ))}
             </ul>
-            <div className="flex flex-wrap gap-3">
+            
+            {/* 技術スタック */}
+            <div className="flex flex-wrap gap-3 mb-10">
               {["React", "Next.js", "Node.js (Express)", "MongoDB", "Tailwind CSS"].map((tech) => (
-                <span key={tech} className="bg-primary/50 border border-primary-light text-sm px-4 py-1.5 rounded-full text-gray-200 hover:bg-primary transition-colors cursor-default">
+                <span key={tech} className="bg-primary/50 border border-primary-light text-sm px-4 py-1.5 rounded-full text-gray-200">
                   {tech}
                 </span>
               ))}
             </div>
+
+            {/* ★追加：実際のサイトを見るボタン */}
+            <motion.a 
+              href="https://tk2-208-13769.vs.sakura.ne.jp" 
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.05, backgroundColor: "rgba(212,175,55,0.1)" }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-flex items-center gap-2 px-8 py-3 border border-accent-gold text-accent-gold font-semibold rounded-full transition-colors"
+            >
+              実際のサイトを見る
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </motion.a>
           </motion.div>
 
           {/* ★追加：スマホを「左→中央→右」と順番に出現させ、マウスホバーで少し浮き上がるように変更 */}
@@ -185,6 +212,79 @@ export default function Home() {
       </section>
 
       {/* =======================
+          Client Work セクション (阿蘇の森)
+      ======================= */}
+      <section id="client-work" className="py-24 px-6 md:px-12 max-w-7xl mx-auto flex flex-col justify-center">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8 }}
+          className="mb-16 md:mb-24 text-right"
+        >
+          <h2 className="text-4xl md:text-5xl font-bold text-accent-gold mb-4 border-r-4 border-accent-gold pr-4 inline-block">
+            Client Work
+          </h2>
+          <p className="text-gray-400 text-lg mt-2">ビジネスの魅力を伝えるWeb制作</p>
+        </motion.div>
+
+        <div className="flex flex-col md:flex-row items-center gap-12 md:gap-16">
+          
+          {/* 左側：画像（左からスライドイン） */}
+          <motion.div
+            initial={{ opacity: 0, x: -80 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
+            className="w-full md:w-1/2 relative aspect-video rounded-2xl overflow-hidden shadow-[0_0_40px_rgba(212,175,55,0.15)] group cursor-pointer"
+          >
+            <div className="absolute inset-0 bg-primary-dark/20 group-hover:bg-transparent transition-colors duration-500 z-10"></div>
+            {/* ★ publicフォルダに入れた画像名に合わせる */}
+            <Image 
+              src="/asonomori.jpg" 
+              alt="ゲストハウス阿蘇の森" 
+              fill 
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover transition-transform duration-700 group-hover:scale-105" 
+              unoptimized
+            />
+          </motion.div>
+
+          {/* 右側：テキスト（右からフワッと時間差で出現） */}
+          <motion.div
+            initial={{ opacity: 0, x: 80 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, delay: 0.2, type: "spring", bounce: 0.3 }}
+            className="w-full md:w-1/2"
+          >
+            <h3 className="text-3xl font-bold mb-4 tracking-wide text-white">
+              ゲストハウス 阿蘇の森
+            </h3>
+            <p className="text-gray-300 leading-relaxed mb-6">
+              熊本県阿蘇の大自然に囲まれたゲストハウス「アソノ森ベース」および併設施設の公式ホームページ制作を担当しました。
+            </p>
+            <p className="text-gray-300 leading-relaxed mb-8">
+              雄大なロケーションの魅力や施設の温もりが直感的に伝わるよう、写真素材を活かしたサイト設計を行っています。友人が運営する現場の想いをヒアリングし、情報設計からデザイン、実装まで一貫して構築しました。
+            </p>
+            
+            <motion.a 
+              href="https://asonomori.com" 
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.05, backgroundColor: "rgba(212,175,55,0.1)" }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-flex items-center gap-2 px-8 py-3 border border-accent-gold text-accent-gold font-semibold rounded-full transition-colors"
+            >
+              実際のサイトを見る
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+            </motion.a>
+          </motion.div>
+
+        </div>
+      </section>      
+
+      {/* =======================
           3. About セクション
       ======================= */}
       <section id="about" className="py-24 px-6 md:px-12 max-w-7xl mx-auto min-h-screen flex flex-col justify-center">
@@ -215,7 +315,9 @@ export default function Home() {
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
               className="w-64 h-64 md:w-80 md:h-80 rounded-full border-4 border-accent-gold/50 bg-primary shadow-[0_0_30px_rgba(212,175,55,0.2)] flex items-center justify-center overflow-hidden relative group cursor-pointer"
             >
-               <Image src="/profile.jpg" alt="Profile" fill className="object-cover z-10 transition-transform duration-700 group-hover:scale-110" />
+               <Image src="/profile.jpg" alt="Profile" fill className="object-cover z-10 transition-transform duration-700 group-hover:scale-110" 
+               sizes="(max-width: 768px) 256px, 320px"
+               />
             </motion.div>
           </motion.div>
 
